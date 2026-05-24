@@ -1,0 +1,55 @@
+[briefcase]
+project_name = "MOSES"
+bundle = "com.mosesassistant"
+version = "1.0.0"
+url = "https://github.com/yourusername/moses"
+license = "BSD license"
+author = "MOSES Team"
+author_email = "contact@moses.ai"
+
+[briefcase.app.moses]
+formal_name = "MOSES Personal Assistant"
+description = "AI-powered personal assistant with memory, todos, and vision capabilities"
+long_description = """
+MOSES is an agentic personal assistant powered by AI. It can chat,
+remember preferences, manage todos, save notes, store reminders, check the
+current time, and run safe calculations through local Python tools.
+"""
+icon = "resources/moses_icon"
+sources = ["moses"]
+test_sources = ["tests"]
+requires = [
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "tzdata>=2024.1",
+    "pillow>=10.0.0",
+    "groq",
+    "notion-client>=2.2.0",
+]
+
+[briefcase.app.moses.android]
+requires = [
+    "android-permissions>=1.0.0",
+]
+
+[briefcase.app.moses.android.permission]
+INTERNET = true
+CAMERA = true
+RECORD_AUDIO = true
+READ_EXTERNAL_STORAGE = true
+WRITE_EXTERNAL_STORAGE = true
+
+[briefcase.app.moses.iOS]
+requires = []
+
+[briefcase.app.moses.windows]
+requires = []
+
+[briefcase.app.moses.linux]
+requires = []
+
+[briefcase.app.moses.macOS]
+requires = []
+
+[briefcase.app.moses.web]
+requires = []

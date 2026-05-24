@@ -1,0 +1,9 @@
+.env
+GEMINI_API_KEY*.env
+data/
+.venv/
+.vs/
+__pycache__/
+*.pyc
+*.log
+moses_gui*.png
