@@ -26,6 +26,19 @@ MOSES_MODEL=gemini-2.5-flash
 MOSES_TIMEZONE=Asia/Kolkata
 ```
 
+## Vercel Deployment
+
+MOSES is ready for Vercel deployment as a serverless application.
+
+1.  **Install Vercel CLI**: `npm i -g vercel`
+2.  **Login**: `vercel login`
+3.  **Deploy**: `vercel`
+4.  **Environment Variables**: In the Vercel dashboard, add:
+    - `GEMINI_API_KEY`: Your Google Gemini API Key
+    - `NOTION_API_KEY`: (Optional) Your Notion API Key
+    - `OPENROUTER_API_KEY`: (Optional) Your OpenRouter API Key
+    - `MOSES_DATA_FILE`: `/tmp/moses_state.json` (Note: State is ephemeral in serverless)
+
 ## Run
 
 Interactive mode:
