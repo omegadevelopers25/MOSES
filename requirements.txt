@@ -1,0 +1,9 @@
+google-genai>=1.0.0
+python-dotenv>=1.0.0
+tzdata>=2024.1
+opencv-python>=4.9.0
+pillow>=10.0.0
+groq
+notion-client>=2.2.0
+briefcase>=0.3.17
+toga>=0.3.0
