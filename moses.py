@@ -25,7 +25,7 @@ except ImportError:  # pragma: no cover - handled at runtime for friendly setup.
     types = None
 
 
-DEFAULT_MODEL = "gemini-2.0-flash"
+DEFAULT_MODEL = "gemini-3.1-flash"
 DEFAULT_TIMEZONE = "Asia/Kolkata"
 
 

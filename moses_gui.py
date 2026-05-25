@@ -1043,8 +1043,6 @@ HTML = r"""<!DOCTYPE html>
       el.reminderCount.textContent = openReminders.length;
       el.modelName.textContent = state.data.model || "Gemini";
 
-      renderAR();
-
       const records = {
         todos: openTodos,
         reminders: openReminders,
@@ -1073,7 +1071,7 @@ HTML = r"""<!DOCTYPE html>
       }
     }
 
-    function renderAR() {
+    function renderAR(frame = 0) {
       const tags = state.data.ar_tags || [];
       const canvas = el.visionAR;
       if (!canvas) return;
@@ -1086,36 +1084,64 @@ HTML = r"""<!DOCTYPE html>
       }
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!tags.length) return;
+
+      // Quirky scanline overlay
+      ctx.fillStyle = "rgba(92, 221, 255, 0.03)";
+      for (let i = 0; i < canvas.height; i += 4) {
+        ctx.fillRect(0, (i + (frame * 50)) % canvas.height, canvas.width, 1);
+      }
       
       for (const tag of tags) {
+        const pulse = Math.sin(frame * 4) * 4;
+        const floatY = Math.cos(frame * 2) * 8;
+        
         const x = tag.x * canvas.width;
         const y = tag.y * canvas.height;
         
+        // Pulsing target
         ctx.beginPath();
-        ctx.arc(x, y, 6, 0, Math.PI * 2);
-        ctx.strokeStyle = "#5cddff";
+        ctx.arc(x, y, 6 + pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = `hsla(${(frame * 40) % 360}, 80%, 70%, 0.8)`;
         ctx.lineWidth = 2;
         ctx.stroke();
         
         ctx.beginPath();
-        ctx.moveTo(x - 10, y);
-        ctx.lineTo(x + 10, y);
-        ctx.moveTo(x, y - 10);
-        ctx.lineTo(x, y + 10);
+        ctx.moveTo(x - 12 - pulse, y);
+        ctx.lineTo(x + 12 + pulse, y);
+        ctx.moveTo(x, y - 12 - pulse);
+        ctx.lineTo(x, y + 12 + pulse);
         ctx.stroke();
         
+        // Floating label box
         ctx.font = "bold 12px Inter, sans-serif";
         const text = tag.label;
         const textWidth = ctx.measureText(text).width;
         
-        ctx.fillStyle = "rgba(8, 15, 22, 0.86)";
-        ctx.fillRect(x + 12, y - 12, textWidth + 12, 24);
-        ctx.strokeStyle = "#5cddff";
-        ctx.strokeRect(x + 12, y - 12, textWidth + 12, 24);
+        const bx = x + 15;
+        const by = y - 15 + floatY;
         
-        ctx.fillStyle = "#e9fbff";
-        ctx.fillText(text, x + 18, y + 4);
+        ctx.fillStyle = "rgba(8, 15, 22, 0.9)";
+        ctx.fillRect(bx, by - 12, textWidth + 12, 24);
+        ctx.strokeStyle = varColor("--cyan");
+        ctx.lineWidth = 1;
+        ctx.strokeRect(bx, by - 12, textWidth + 12, 24);
+        
+        // Connecting line
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(bx, by);
+        ctx.setLineDash([2, 2]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        ctx.fillStyle = varColor("--text");
+        ctx.fillText(text, bx + 6, by + 4);
       }
+    }
+
+    function varColor(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
 
     function renderRecord(record) {
@@ -1382,6 +1408,7 @@ HTML = r"""<!DOCTYPE html>
           ctx.fill();
         }
 
+        renderAR(frame);
         requestAnimationFrame(draw);
       }
 
