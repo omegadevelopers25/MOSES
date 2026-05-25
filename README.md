@@ -37,6 +37,7 @@ MOSES is ready for Vercel deployment as a serverless application.
     - `GEMINI_API_KEY`: Your Google Gemini API Key
     - `NOTION_API_KEY`: (Optional) Your Notion API Key
     - `OPENROUTER_API_KEY`: (Optional) Your OpenRouter API Key
+    - `GROQ_API_KEY`: (Optional) Your Groq API Key (required for GPToss and Ollama backends)
     - `MOSES_DATA_FILE`: `/tmp/moses_state.json` (Note: State is ephemeral in serverless)
 
 ## Run
