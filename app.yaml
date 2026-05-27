@@ -1,0 +1,13 @@
+runtime: python39
+
+instance_class: F1
+
+entrypoint: gunicorn -b :$PORT main:app
+
+env_variables:
+  MOSES_DATA_FILE: "/tmp/moses_state.json"
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 0
+  max_instances: 2

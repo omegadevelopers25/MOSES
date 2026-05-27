@@ -40,8 +40,7 @@ HTML = r"""<!DOCTYPE html>
       --shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
       font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
     }
-
-    * {
+    {
       box-sizing: border-box;
     }
 

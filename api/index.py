@@ -22,13 +22,6 @@ store = AssistantStore(Path(DATA_FILE), timezone=os.getenv("MOSES_TIMEZONE", DEF
 workspace = WorkspaceAccess(Path(WORKSPACE_DIR))
 gui_state = GuiState(store, os.getenv("MOSES_MODEL", DEFAULT_MODEL), SYSTEM_INSTRUCTION, workspace)
 
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve_gui(path):
-    if path == "api/state":
-        return jsonify(gui_state.snapshot())
-    return Response(HTML, mimetype="text/html")
-
 @app.route("/api/chat", methods=["POST"])
 def chat():
     payload = request.json or {}
@@ -85,6 +78,12 @@ def get_state():
         return jsonify(gui_state.snapshot())
     except Exception as exc:
         return jsonify({"error": str(exc)}), 500
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_gui(path):
+    # This catch-all should only serve HTML for non-API routes
+    return Response(HTML, mimetype="text/html")
 
 # Entry point for Vercel
 handler = app

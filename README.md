@@ -40,6 +40,16 @@ MOSES is ready for Vercel deployment as a serverless application.
     - `GROQ_API_KEY`: (Optional) Your Groq API Key (required for GPToss and Ollama backends)
     - `MOSES_DATA_FILE`: `/tmp/moses_state.json` (Note: State is ephemeral in serverless)
 
+## Google Cloud Deployment (App Engine)
+
+MOSES is configured for Google Cloud App Engine.
+
+1.  **Install Google Cloud CLI**: [Follow instructions here](https://cloud.google.com/sdk/docs/install).
+2.  **Initialize**: `gcloud init`
+3.  **Create App**: `gcloud app create`
+4.  **Deploy**: `gcloud app deploy`
+5.  **Environment Variables**: You can set your API keys in `app.yaml` under `env_variables` or use the Google Cloud Secret Manager.
+
 ## Run
 
 Interactive mode:

@@ -119,7 +119,7 @@ class SafeCalculator(ast.NodeVisitor):
         return self.visit(node.body)
 
     def visit_Constant(self, node: ast.Constant) -> float:
-        if isinstance(node.value, int | float):
+        if isinstance(node.value, (int, float)):
             return node.value
         raise ValueError("Only numeric values are allowed.")
 

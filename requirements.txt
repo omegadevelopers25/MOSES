@@ -9,3 +9,5 @@ briefcase>=0.3.17
 toga>=0.3.0
 flask
 flask-cors
+requests
+gunicorn
