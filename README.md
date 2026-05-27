@@ -42,13 +42,12 @@ MOSES is ready for Vercel deployment as a serverless application.
 
 ## Google Cloud Deployment (App Engine)
 
-MOSES is configured for Google Cloud App Engine.
+MOSES is configured for Google Cloud App Engine (Project ID: `mynimalist`).
 
 1.  **Install Google Cloud CLI**: [Follow instructions here](https://cloud.google.com/sdk/docs/install).
-2.  **Initialize**: `gcloud init`
-3.  **Create App**: `gcloud app create`
-4.  **Deploy**: `gcloud app deploy`
-5.  **Environment Variables**: You can set your API keys in `app.yaml` under `env_variables` or use the Google Cloud Secret Manager.
+2.  **Initialize**: `gcloud init` (and select project `mynimalist`)
+3.  **Deploy**: `gcloud app deploy --project=mynimalist`
+4.  **Environment Variables**: You can set your API keys in `app.yaml` under `env_variables` or use the Google Cloud Secret Manager.
 
 ## Run
 
